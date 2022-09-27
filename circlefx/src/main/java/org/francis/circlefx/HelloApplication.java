@@ -11,8 +11,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
 public class HelloApplication extends Application {
-    private Circle c = new Circle(100, 100, 10, Color.RED);
+    private Circle c = null;
     private int clickedCounter = 0;
     private int radiusChange = 1;
     EventHandler<MouseEvent> handleMouseDrag = new EventHandler<MouseEvent>() {
@@ -53,8 +54,10 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+
         primaryStage.setTitle("Hello World!");
         primaryStage.setFullScreen(true);
+        c = new Circle(100, 100, 10, Color.RED);
         c.setOnMouseDragged(handleMouseDrag);
         c.setOnMouseClicked(handleMouseClick);
         Group root = new Group();
@@ -67,6 +70,78 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+
+        Kreis k1 = new Kreis(-1, 11, 100, 0.2f);
+        k1.setRadius(10);
+
+        Kreis k2 = new Kreis(10, 1, 150, 1.2f);
+        k2.setRadius(120);
+
+        Kreis k3 = k1;
+        k3.setRadius(30);
+
+        int r1 = k3.getRadius();
+
+        double ar1 = k1.area();
+
+
+        System.out.println(ar1);
+
+        //launch();
     }
 }
+
+
+class Kreis{
+    private int radius;
+    private int xPosition;
+    private int yPosition;
+    private float thickness;
+
+    private final double pi = 3.14;
+    public double area() {
+        return pi*Math.pow(radius, 2);
+    }
+
+
+
+    public Kreis(int r, int x, int y , float t ){
+        radius = r;
+        xPosition = x;
+        yPosition = y;
+        thickness = t;
+    }
+
+    public void setRadius(int r){
+        this.radius = r;
+    }
+
+    public int getRadius(){
+        return radius;
+    }
+
+    public int getxPosition() {
+        return xPosition;
+    }
+
+    public void setxPosition(int xPosition) {
+        this.xPosition = xPosition;
+    }
+
+    public int getyPosition() {
+        return yPosition;
+    }
+
+    public void setyPosition(int yPosition) {
+        this.yPosition = yPosition;
+    }
+
+    public float getThickness() {
+        return thickness;
+    }
+
+    public void setThickness(float thickness) {
+        this.thickness = thickness;
+    }
+}
+
